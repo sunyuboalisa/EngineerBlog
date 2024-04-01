@@ -1,16 +1,16 @@
 baseURL: "https://engineerblog.pages.dev/"
 theme: "up-business-theme"
-languageCode: "en-us"
+languageCode: "zh-cn"
 
-title: "Up Business"
+title: "工程师 生活"
 
 # googleAnalytics: ""
 
 summaryLength: 20
 
 params:
-  title: "Up Business"
-  description: "We specialize in providing services to desing websites, applications, build and maintain business for customers."
+  title: "成为一个优秀的工程师"
+  description: "失败并不可怕，只要不断改进，事情总会解决的"
   images: 
     - "images/hero-image.png"
 
@@ -28,61 +28,61 @@ params:
     twitter: "#"
 
   location:
-    - "3891 Ranchview Dr. Richardson, California 62639"
-    - "4517 Washington Ave. Manchester, Kentucky 39495"
+    - "北京市海淀区 "
+    - "河南省洛阳市"
 
   contact:
-    - "trungkienspktnd@gamail.com"
-    - "207.555.0119"
+    - "sunyubo.alisa@outlook.com"
+    - "16638901715"
 
   copyright: "© 2022 Up Business All Rights Reserved"
 
 menus:
   main:
-    - name: "Home"
+    - name: "主页"
       url: "/#hero"
       weight: 1
 
-    - name: "How we work"
+    - name: "产品"
       url: "/#"
       weight: 2
 
-    - name: "Our team"
-      url: "/#"
-      weight: 3
+    # - name: "Our team"
+    #   url: "/#"
+    #   weight: 3
 
-    - name: "Pricing"
-      url: "/#"
-      weight: 4
+    # - name: "Pricing"
+    #   url: "/#"
+    #   weight: 4
 
-    - name: "Blog"
+    - name: "博客"
       url: "/blog"
       weight: 5
 
-  buttons:
-    - name: "Book a call"
-      url: "/#"
-      weight: 5
-      pre: "btn btn-primary text-light"
+  # buttons:
+  #   - name: "Book a call"
+  #     url: "/#"
+  #     weight: 5
+  #     pre: "btn btn-primary text-light"
 
   footer:
-    - name: "Home"
+    - name: "主页"
       url: "/#hero"
       weight: 1
 
-    - name: "How we work"
+    - name: "产品"
       url: "/#"
       weight: 2
 
-    - name: "Our team"
-      url: "/#"
-      weight: 3
+    # - name: "Our team"
+    #   url: "/#"
+    #   weight: 3
 
-    - name: "Pricing"
-      url: "/#"
-      weight: 4
+    # - name: "Pricing"
+    #   url: "/#"
+    #   weight: 4
 
-    - name: "Blog"
+    - name: "博客"
       url: "/blog"
       weight: 5
 
