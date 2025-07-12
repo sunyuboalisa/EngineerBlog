@@ -6,6 +6,7 @@ longform:
   sceneFolder: /
   scenes:
     - 网络
+  sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
 ## 反向代理服务器
