@@ -1,6 +1,6 @@
 ---
 title: Welcome to Quartz
 ---
+人生不止三十年，无法被扼杀的是自己的思想，相信自己做一些有意义的事情。
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+这个相当于是个个人的知识库，用于我本人累计知识，也希望和更多的人一起学习。
