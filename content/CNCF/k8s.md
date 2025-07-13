@@ -41,7 +41,7 @@ local
 # Plugin
 
 ## Kong Ingress Controller
-```
+```yaml
 # 安装Gateway API
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.1.0/standard-install.yaml
 
@@ -81,7 +81,7 @@ helm install kong kong/ingress -n kong --create-namespace
 
 ## Linkerd
 
-```
+```sh
 
 #导出yaml安装文件，用于配置离线镜像
 linkerd viz install > linkerd-viz.yaml

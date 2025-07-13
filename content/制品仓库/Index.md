@@ -10,7 +10,7 @@ longform:
 # npm 私有仓库
 ## Verdaccio
 
-```
+```sh
 npm install -g verdaccio
 yarn global add verdaccio
 ```
@@ -28,12 +28,14 @@ JAVA 环境配置
 maven配置
 配置PATH
 镜像配置
+```xml
 <mirror>
   <id>aliyunmaven</id>
   <mirrorOf>*</mirrorOf>
   <name>阿里云公共仓库</name>
   <url>https://maven.aliyun.com/repository/public</url>
 </mirror>
+```
 # Maven 私有仓库
 ## Reposilite Repository
 第一次用jar包方式启动，并配置用户名和密码
@@ -44,7 +46,7 @@ token-generate alisa m
 java -Xmx128M -jar .\reposilite-3.5.25-all.jar
 这次登录用刚刚的token
 接下来配置maven的settings.xml文件
-```
+```xml
 <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 http://maven.apache.org/xsd/settings-1.2.0.xsd">

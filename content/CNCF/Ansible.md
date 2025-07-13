@@ -36,7 +36,7 @@ Projects in the Ansible ecosystem also provide several tools that you can use wi
 一个提供管理节点列表的清单
 默认两个分组是 all 和 ungrouped
 创建分组
-```
+```ini
 mail.example.com
 
 [webservers]

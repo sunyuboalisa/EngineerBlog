@@ -5,7 +5,7 @@ tags:
 ---
  如果你想改成静态 IP，基于你的配置模板，可以调整成这样：
 
-```
+```yaml
 network:
   version: 2
   ethernets:
@@ -37,3 +37,23 @@ network:
 
 4. 检查 IP 是否生效：
 `ip a show ens33 ping 8.8.8.8`
+# SSH
+添加ssh
+```sh 
+#安装ssh，（ubuntu 默认安装了openssh-client）
+sudo apt install openssh-server
+#配置ssh
+sudo sshd -t -f /etc/ssh/sshd_config
+sudo systemctl restart ssh.service
+
+#其他客户端配置ssh
+#生成公钥密钥
+ssh-keygen -t rsa
+#将公钥复制到ssh服务器中
+ssh-copy-id {username}@{remotehost}
+#在文件权限不对的时候可以执行下面，
+chmod 600 .ssh/authorized_keys
+
+#其他应用导入ssh，如git
+ssh-import-id <username-on-remote-service>
+```
