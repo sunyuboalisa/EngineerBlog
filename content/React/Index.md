@@ -4,7 +4,9 @@ longform:
   title: React
   workflow: Default Workflow
   sceneFolder: /
-  scenes: []
+  scenes:
+    - NextJS
+  sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
 

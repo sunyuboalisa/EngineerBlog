@@ -63,7 +63,7 @@ dbservers:
     three.example.com:
 ```
 分组中父子关系
-```
+```ini
 # ini 中可以直接:children
 [prod:children]
 east
@@ -213,6 +213,12 @@ Ad Hoc
 ```
 ansible [pattern] -m [module] -a "[module options]"
 ```
+`ansible` 默认使用的模块是 `ansible.builtin.command`,下面两个命令就是等价的
+```
+ansible [pattern] -a "[module options]"
+ansible [pattern] -m ansible.builtin.command -a "[module options]"
+```
+
 Ansible-Playbook
 
 ### Playbooks

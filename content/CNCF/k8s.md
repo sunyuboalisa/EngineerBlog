@@ -106,3 +106,6 @@ ps aux | grep "kubectl port-forward"
 kill xxxx
 
 ```
+
+## Flannel
+
