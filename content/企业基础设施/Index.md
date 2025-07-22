@@ -6,6 +6,7 @@ longform:
   sceneFolder: /
   scenes:
     - 网络
+    - 计算机设置
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
