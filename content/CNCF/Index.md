@@ -12,6 +12,8 @@ longform:
     - Ubuntu
     - Docker
     - kubespray
+    - 网络
   sceneTemplate: templates/chapter.md
-  ignoredFiles: []
+  ignoredFiles:
+    - undefined
 ---
