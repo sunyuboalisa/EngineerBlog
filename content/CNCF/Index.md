@@ -13,6 +13,8 @@ longform:
     - Docker
     - kubespray
     - 网络
+    - 数据
+    - Open Stack
   sceneTemplate: templates/chapter.md
   ignoredFiles:
     - undefined
