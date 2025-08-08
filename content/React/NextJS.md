@@ -11,6 +11,7 @@ npx create-next-app@latest
 ```
 # 概念
 ## JSX
+在js中使用html标签的一种语法。
 ## Hook
 ## Layout && Page
 layout 是通用的UI 模板，Page 是路由后展示的页面
@@ -72,6 +73,8 @@ export default function Error({
 - global css
 - saas
 ## Route Handlers && Middleware
+app 路由和中间件
+
 ## Deploying
 
 
