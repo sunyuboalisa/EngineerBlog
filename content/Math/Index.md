@@ -4,7 +4,9 @@ longform:
   title: Math
   workflow: Default Workflow
   sceneFolder: /
-  scenes: []
+  scenes:
+    - Python
+    - 数学基础知识
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---

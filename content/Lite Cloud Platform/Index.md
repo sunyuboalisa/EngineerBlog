@@ -1,7 +1,7 @@
 ---
 longform:
   format: scenes
-  title: Self Cloud Platform
+  title: Lite Cloud Platform
   workflow: Default Workflow
   sceneFolder: /
   scenes: []
