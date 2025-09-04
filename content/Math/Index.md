@@ -7,6 +7,7 @@ longform:
   scenes:
     - Python
     - 数学基础知识
+    - 英语
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
