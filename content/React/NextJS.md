@@ -18,6 +18,13 @@ layout 是通用的UI 模板，Page 是路由后展示的页面
 ## Linking && Navigating
 可以动态渲染页面，不是一次性整个加载页面
 ## Server && Client Components
+CSR
+河马下单-》自己做饭，每个人做饭速度不一样
+
+SSR
+直接给饭店下单
+ESR
+预制菜
 
 ## Partial Prerendering
 ## Fetching && Updating Data
@@ -81,6 +88,10 @@ app 路由和中间件
 # UI 布局
 先自己构想出容器的分布，一共多少个容器，分别怎样放置，用什么布局方式。然后再在每个容器中放置元素。
 ## 布局方式
+一些场景
+- 千人一面
+- 千人多面
+- 千人千面
 ## 配色
 ## 数据显示
 ## 交互
