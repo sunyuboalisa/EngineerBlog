@@ -15,6 +15,8 @@ longform:
     - 网络
     - 数据
     - Open Stack
+    - 体系结构
+    - 分布式架构
   sceneTemplate: templates/chapter.md
   ignoredFiles:
     - undefined
