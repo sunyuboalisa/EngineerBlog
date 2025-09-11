@@ -6,6 +6,7 @@ longform:
   sceneFolder: /
   scenes:
     - NextJS
+    - Electron
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
