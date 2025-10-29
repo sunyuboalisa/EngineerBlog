@@ -9,7 +9,82 @@ tags:
 
 ## 语句
 ## 类
+## 指针
+指针就是指向内存中的一块空间，至于如何来解释/操作这块空间，由这个指针的类型来决定。
+### 一般指针
+```yaml
+[类型说明符 type-specifier] + [声明符 declarator]
 
+type *var-name;
+```
+
+> [!note] notes: 
+声明符（declarator）：包含变量名，并可带有 `*`（指针）、`[]`（数组）、`()`（函数）等操作符，描述变量的结构。
+数组名本身会被隐式转换为指向其第一个元素的指针。
+
+一些指针例子：
+```c
+int arr[5] = {10, 20, 30, 40, 50};
+int (*p)[5] = &arr;  // p 是一个指向“包含5个int的数组”的指针
+int add(int a,int b){
+	return a+b;
+}
+void (*p)(int,int)=add;
+```
+### 指向指针的指针
+```c
+#include <stdio.h>
+
+int main()
+{
+    int var = 10;
+    int *intptr = &var;
+    int **ptrptr = &intptr;
+
+    printf("var: %d \nAddress of var: %d \n\n", var, &var);
+    printf("inttptr: %d \nAddress of inttptr: %d \n\n", intptr, &intptr);
+    printf("var: %d \nValue at intptr: %d \n\n", var, *intptr);
+    printf("ptrptr: %d \nAddress of ptrtptr: %d \n\n", ptrptr, &ptrptr);
+    printf("intptr: %d \nValue at ptrptr: %d \n\n", intptr, *ptrptr);
+    printf("var: %d \n*intptr: %d \n**ptrptr: %d", var, *intptr, **ptrptr);
+
+    return 0;
+}
+
+// 输出
+var: 10 
+Address of var: 951734452 
+
+inttptr: 951734452 
+Address of inttptr: 951734456 
+
+var: 10 
+Value at intptr: 10 
+
+ptrptr: 951734456 
+Address of ptrtptr: 951734464 
+intptr: 951734452 
+Value at ptrptr: 951734452 
+
+var: 10 
+*intptr: 10 
+**ptrptr: 10
+```
+### 空指针
+
+```c
+ #include <stdio.h>
+
+ int main()
+ { 
+	 int *ptr = NULL; 
+	 printf("The value of ptr is : %x\n", ptr); 
+	 return 0; 
+ }
+ 
+ // 输出
+ The value of ptr is 0
+```
 # 开发环境
 
 # 数据结构与算法
