@@ -1,10 +1,10 @@
 {
-  "name": "@jackyzha0/quartz",
+  "name": "@sunyubo/blog",
   "description": "🌱 publish your digital garden and notes as a website",
   "private": true,
   "version": "4.5.1",
   "type": "module",
-  "author": "jackyzha0 <j.zhao2k19@gmail.com>",
+  "author": "sunyubo <sunyubo.alisa@outlook.com>",
   "license": "MIT",
   "homepage": "https://quartz.jzhao.xyz",
   "repository": {
