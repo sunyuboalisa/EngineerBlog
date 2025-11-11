@@ -57,3 +57,11 @@ chmod 600 .ssh/authorized_keys
 #其他应用导入ssh，如git
 ssh-import-id <username-on-remote-service>
 ```
+# Network
+ubuntu 下主要有两种网络管理工具
+- **NetworkManager**
+- **systemd-networkd**
+网络配置渲染器
+- [Netplan](https://netplan.io/)
+DNS解析器
+- **systemd-resolved**
