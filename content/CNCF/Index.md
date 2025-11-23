@@ -17,6 +17,7 @@ longform:
     - Open Stack
     - 体系结构
     - 分布式架构
+    - 虚拟化
   sceneTemplate: templates/chapter.md
   ignoredFiles:
     - undefined
