@@ -7,6 +7,7 @@ longform:
   scenes:
     - C++
     - 操作系统
+    - 工具链
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
