@@ -3,6 +3,12 @@ title: Ubuntu
 draft: false
 tags:
 ---
+配置不需要sudo密码
+```
+sudo visudo
+alisa ALL=(ALL) NOPASSWD: ALL
+```
+
  如果你想改成静态 IP，基于你的配置模板，可以调整成这样：
 
 ```yaml

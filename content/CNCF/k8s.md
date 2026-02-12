@@ -42,40 +42,96 @@ local
 
 ## Kong Ingress Controller
 ```yaml
-# 安装Gateway API
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.1.0/standard-install.yaml
-
-# 创建Gateway 和 GatewayClass
-echo "
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: GatewayClass
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
- name: kong
- annotations:
-   konghq.com/gatewayclass-unmanaged: 'true'
-
+  name: postgres-pvc
+  namespace: kong
 spec:
- controllerName: konghq.com/kic-gateway-controller
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
 ---
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
+apiVersion: v1
+kind: Service
 metadata:
- name: kong
+  name: postgres-svc
+  namespace: kong
 spec:
- gatewayClassName: kong
- listeners:
- - name: proxy
-   port: 80
-   protocol: HTTP
-   allowedRoutes:
-     namespaces:
-        from: All
-" | kubectl apply -f -
+  ports:
+    - port: 5432
+  selector:
+    app: postgres
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: kong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          env:
+            - name: POSTGRES_USER
+              value: "kong"
+            - name: POSTGRES_PASSWORD
+              value: "kong_pass" 
+            - name: POSTGRES_DB
+              value: "kong"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: pg-data
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres 
+      volumes:
+        - name: pg-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+ # 将上面的放到一个postgres.yaml文件中
+kubectl create -f postgres.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml
+
+tar -zxvf helm-v4.0.5-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/local/bin/helm
+helm repo add kong https://charts.konghq.com
+helm repo update
 
 # 安装 Kong Ingress
-
-helm install kong kong/ingress -n kong --create-namespace 
+export HOST_IP="192.168.0.10"
+helm upgrade --install kong kong/ingress -n kong \
+  --set gateway.admin.enabled=true \
+  --set gateway.admin.http.enabled=true \
+  --set gateway.admin.type=NodePort \
+  --set gateway.admin.http.nodePort=30001 \
+  --set gateway.manager.enabled=true \
+  --set gateway.manager.type=NodePort \
+  --set gateway.manager.http.nodePort=30256 \
+  --set gateway.env.admin_listen='0.0.0.0:8001\, 0.0.0.0:8444 ssl' \
+  --set gateway.env.admin_gui_url="http://$HOST_IP:30256" \
+  --set gateway.env.admin_gui_api_url="http://$HOST_IP:30001" \
+  --set gateway.env.admin_gui_cors_origins="*" \
+  --set gateway.env.database=postgres \
+  --set gateway.env.pg_host=postgres-svc \
+  --set gateway.env.pg_user=kong \
+  --set gateway.env.pg_password=kong_pass \
+  --set gateway.env.pg_database=kong \
+  --set postgresql.enabled=false \
+  --set controller.ingressController.env.feature_gates="GatewayAlpha=true"
+  
+helm uninstall kong -n kong
 ```
 
 
@@ -83,27 +139,18 @@ helm install kong kong/ingress -n kong --create-namespace
 
 ```sh
 
-#导出yaml安装文件，用于配置离线镜像
-linkerd viz install > linkerd-viz.yaml
-#修改 linkerd-viz.yaml ，确保能离线下载镜像
-#安装
-kubectl apply -f linkerd-viz.yaml
-#检查
-linkerd viz check
+export LINKERD2_VERSION=edge-25.10.7
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
+export PATH=$HOME/.linkerd2/bin:$PATH
+linkerd version
 
-#运行viz
-linkerd viz dashboard
-#或者后台运行
-linkerd viz dashboard &
-#成功后会输出一个地址
+linkerd check --pre
 
-# 暴露端口，用于测试
-kubectl port-forward -n linkerd-viz svc/web 8084:8084 --address 0.0.0.0
+linkerd install --crds | kubectl apply -f -
+linkerd install | kubectl apply -f -
+linkerd check
 
-# 清理测试痕迹
-ps aux | grep "linkerd viz dashboard"
-ps aux | grep "kubectl port-forward"
-kill xxxx
+linkerd viz install | kubectl apply -f -
 
 ```
 

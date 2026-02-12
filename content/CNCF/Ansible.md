@@ -309,6 +309,7 @@ ansible-playbook -i inventory.int playbook.yaml
 ```
 工具
 
+使用 uv run ansible-playbook -i inventory.int playbook.yaml
 
 参考：
 1.https://docs.ansible.com/ansible/latest/getting_started/get_started_inventory.html

@@ -7,6 +7,7 @@ longform:
   scenes:
     - NextJS
     - Electron
+    - 个人封装js库
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---

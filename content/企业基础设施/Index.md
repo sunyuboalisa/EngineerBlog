@@ -7,6 +7,8 @@ longform:
   scenes:
     - 网络
     - 计算机设置
+    - 用户体系
+    - 证书
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
