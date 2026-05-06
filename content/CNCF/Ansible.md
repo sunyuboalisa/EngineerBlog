@@ -311,5 +311,8 @@ ansible-playbook -i inventory.int playbook.yaml
 
 使用 uv run ansible-playbook -i inventory.int playbook.yaml
 
+uv run ansible-galaxy init roles/db_server
+uv run ansible-playbook site.yml
+
 参考：
 1.https://docs.ansible.com/ansible/latest/getting_started/get_started_inventory.html

@@ -6,6 +6,10 @@ longform:
   sceneFolder: /
   scenes:
     - python
+    - 机器学习
+    - 人工智能
+    - MCP
+  sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
 ```

@@ -8,9 +8,23 @@ longform:
     - NextJS
     - Electron
     - 个人封装js库
+    - 工具链
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
+主流开源库
+
+| 名称                 | 功能  | 备注  |
+| ------------------ | --- | --- |
+| dayjs              |     |     |
+| @aws-sdk/client-s3 |     |     |
+| tsup               |     |     |
+| typescript         |     |     |
+| react              |     |     |
+| react-dome         |     |     |
+| @types/react       |     |     |
+| @types/react-dom   |     |     |
+|                    |     |     |
 
 # 前端环境
 在windows下如果提示powershell执行不了的时候可以执行下列命令
