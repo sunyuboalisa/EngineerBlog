@@ -37,4 +37,10 @@ longform:
 | tiktoken       |     |     |     |
 | requests       |     |     |     |
 | beautifulsoup4 |     |     |     |
+| typer          |     |     |     |
+| rich           |     |     |     |
+| termios        |     |     |     |
+| asyncio        |     |     |     |
+| fastmcp        |     |     |     |
+| rtoml          |     |     |     |
 
