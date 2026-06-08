@@ -6,6 +6,5 @@ longform:
   sceneFolder: /
   scenes:
     - Tauri
-  sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
