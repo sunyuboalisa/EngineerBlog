@@ -1,12 +1,11 @@
 ---
 longform:
   format: scenes
-  title: 项目
+  title: Maker
   workflow: Default Workflow
   sceneFolder: /
   scenes:
-    - Alisa
-    - Lite Cloud Platform
+    - 工具
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---

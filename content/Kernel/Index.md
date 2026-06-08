@@ -9,6 +9,7 @@ longform:
     - 操作系统
     - 工具链
     - 概念内核
+    - RISC-V
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---

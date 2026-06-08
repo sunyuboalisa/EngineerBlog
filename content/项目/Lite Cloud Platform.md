@@ -1,14 +1,10 @@
 ---
-longform:
-  format: scenes
-  title: Lite Cloud Platform
-  workflow: Default Workflow
-  sceneFolder: /
-  scenes: []
-  ignoredFiles: []
+title: Lite Cloud Platform
+draft: false
+tags:
 ---
-## 前言
 
+# 前言
 ### 历史背景：
 在一个企业初步转型云平台的时候，将面临很多问题，以前分散的服务和资源怎么统一管理，这些服务又怎么交互，怎么自动化运维，怎么保证高可用。很多云平台都是按照企业的业务需要定制的，一些流行的云平台的一体式解决方案大多不太适合。因此想设计一个可以定制的云平台方案。
 

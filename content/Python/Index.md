@@ -7,6 +7,7 @@ longform:
   scenes:
     - 数据集
     - 工具链
+    - FastAPI
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
@@ -37,4 +38,10 @@ longform:
 | tiktoken       |     |     |     |
 | requests       |     |     |     |
 | beautifulsoup4 |     |     |     |
+| typer          |     |     |     |
+| rich           |     |     |     |
+| termios        |     |     |     |
+| asyncio        |     |     |     |
+| fastmcp        |     |     |     |
+| rtoml          |     |     |     |
 
