@@ -6,6 +6,7 @@ longform:
   sceneFolder: /
   scenes:
     - Alisa
+    - Lite Cloud Platform
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
