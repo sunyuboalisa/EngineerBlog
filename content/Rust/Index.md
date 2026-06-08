@@ -4,6 +4,8 @@ longform:
   title: Rust
   workflow: Default Workflow
   sceneFolder: /
-  scenes: []
+  scenes:
+    - Tauri
+  sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---

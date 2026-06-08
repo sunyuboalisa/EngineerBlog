@@ -7,6 +7,7 @@ longform:
   scenes:
     - 数据集
     - 工具链
+    - FastAPI
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
