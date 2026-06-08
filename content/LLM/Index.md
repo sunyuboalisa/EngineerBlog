@@ -9,6 +9,8 @@ longform:
     - 机器学习
     - 人工智能
     - MCP
+    - 示例
+    - Agent
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---

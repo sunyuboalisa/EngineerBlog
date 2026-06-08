@@ -1,15 +1,11 @@
 ---
 longform:
   format: scenes
-  title: Kernel
+  title: Maker
   workflow: Default Workflow
   sceneFolder: /
   scenes:
-    - C++
-    - 操作系统
-    - 工具链
-    - 概念内核
-    - RISC-V
+    - 工具
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
