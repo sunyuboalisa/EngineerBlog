@@ -44,4 +44,8 @@ longform:
 | asyncio        |     |     |     |
 | fastmcp        |     |     |     |
 | rtoml          |     |     |     |
+| shutil         |     |     |     |
+| loguru         |     |     |     |
+| json           |     |     |     |
+| dataclasses    |     |     |     |
 
