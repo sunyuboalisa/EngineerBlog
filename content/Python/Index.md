@@ -48,4 +48,13 @@ longform:
 | loguru         |     |     |     |
 | json           |     |     |     |
 | dataclasses    |     |     |     |
+| Jinja2         |     |     |     |
+| dulwich        |     |     |     |
+| mimetypes      |     |     |     |
+| pymupdf        |     |     |     |
+| base64         |     |     |     |
+| pypdf          |     |     |     |
+| python-docx    |     |     |     |
+| python-pptx    |     |     |     |
+| openpyxl       |     |     |     |
 

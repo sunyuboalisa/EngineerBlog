@@ -54,6 +54,16 @@ riscv64-unknown-linux-gnu-gcc --version
 4. 定义入口函数 （main.c）
 5. 编写 Makefile，将汇编源文件和c语言源文件编译，配置qemu启动
 
+---
+# 内存管理
+## 寻址
+## 页表
+## 物理内存管理
+## 虚拟内存管理
+
+# 进程管理
+# 文件系统
+# 设备驱动
 
 
 [^1]: https://pdos.csail.mit.edu/6.1810/2025/xv6/book-riscv-rev5.pdf
