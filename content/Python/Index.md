@@ -57,4 +57,5 @@ longform:
 | python-docx    |     |     |     |
 | python-pptx    |     |     |     |
 | openpyxl       |     |     |     |
+| json-repair    |     |     |     |
 

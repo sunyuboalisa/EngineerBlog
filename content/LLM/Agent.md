@@ -50,6 +50,9 @@ sequenceDiagram
     participant AgentLoop as Agent Loop
     participant Cmd as Command 处理器
     participant Task as Async Dispatch 任务
+    participant ProcessMessage as Process Message 消息
+    participant RunAgentLoop as Run Agent Loop
+    participant RunnerRun as Runner.run
 
     User->>Bus: 发送消息 msg
     AgentLoop->>Bus: consume_inbound 消费消息
@@ -64,6 +67,14 @@ sequenceDiagram
     Note over AgentLoop: 场景 3: 纯新会话消息
     AgentLoop->>Task: asyncio.create_task(_dispatch)
     Note over AgentLoop, Task: 注册 done_callback <br>运行完自动销毁
+
+    Task->>ProcessMessage: _process_message(msg,on_stream,...)
+    Note over ProcessMessage: 构建message
+    
+    ProcessMessage->>RunAgentLoop:AgentLoop._run_agent_loop(messages,...)
+    Note over RunAgentLoop: 构建 AgentHook，checkpoint，drain_pending
+    
+    RunAgentLoop->>RunnerRun:AgentRunner.run(AgentRunSpec(...))
 ```
 # Session
 # Tools
