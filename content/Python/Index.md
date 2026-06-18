@@ -58,4 +58,5 @@ longform:
 | python-pptx    |     |     |     |
 | openpyxl       |     |     |     |
 | json-repair    |     |     |     |
+| inspect        |     |     |     |
 
