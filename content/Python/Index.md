@@ -59,4 +59,6 @@ longform:
 | openpyxl       |     |     |     |
 | json-repair    |     |     |     |
 | inspect        |     |     |     |
+| ipaddress      |     |     |     |
+| socket         |     |     |     |
 
