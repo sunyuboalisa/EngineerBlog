@@ -61,4 +61,5 @@ longform:
 | inspect        |     |     |     |
 | ipaddress      |     |     |     |
 | socket         |     |     |     |
+| prompt-toolkit |     |     |     |
 
