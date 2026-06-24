@@ -21,10 +21,12 @@ longform:
 | tsup               |     |     |
 | typescript         |     |     |
 | react              |     |     |
-| react-dome         |     |     |
+| react-dom          |     |     |
 | @types/react       |     |     |
 | @types/react-dom   |     |     |
-|                    |     |     |
+| react-router       |     |     |
+| react-markdown     |     |     |
+| openai             |     |     |
 
 # 前端环境
 在windows下如果提示powershell执行不了的时候可以执行下列命令

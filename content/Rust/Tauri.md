@@ -30,3 +30,5 @@ bun tauri dev
 ```shell
 bun tauri build
 ```
+# IPC
+# Multi Windows

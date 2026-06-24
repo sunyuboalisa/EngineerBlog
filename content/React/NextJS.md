@@ -5,6 +5,20 @@ tags:
 ---
  
 # 介绍
+页面常见的几种生成方式
+- static site generation (SSG)
+- single-page applications (SPA)
+- lassic multi-page apps (MPA)
+- client-side Rendering (CSR)
+- server-side rendering (SSR)
+
+术语
+
+| 名称        | 解释                                             |
+| --------- | ---------------------------------------------- |
+| Hydration | **注水 / 水合**（SSR 之后，JavaScript 接管页面并使其具备交互性的过程） |
+| SEO       | **搜索引擎优化**                                     |
+
 # 安装
 ```sh
 npx create-next-app@latest
