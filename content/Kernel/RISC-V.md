@@ -47,6 +47,88 @@ riscv64-unknown-linux-gnu-gcc --version
 | **杂项库函数**<br><br>  <br><br>_(Misc)_     | `sleeplock.c`   | **睡眠锁（Sleep Lock）**。一种长睡眠锁。当一个线程拿不到锁时，它会主动躺下睡觉（放弃 CPU），等锁释放了再被唤醒。适用于耗时很长的磁盘 I/O 场景。  |
 |                                         | `spinlock.c`    | **自旋锁（Spin lock）**。一种极度狂热的短锁。当拿不到锁时，CPU 会在原地死等（Spin）。适用于多核 CPU 修改内核核心全局变量的极短场景。      |
 |                                         | `string.c`      | **C 语言字符串与字节数组库**。内核自己实现的 `memset`、`memmove`、`strlen` 等基础工具函数。                       |
+# 相关基础知识
+## RISC-V 核心寄存器与指令分类整理表
+### 32个通用寄存器
+在 RISC-V 中，共有 32 个通用寄存器（在 RV64 中每个寄存器都是 64 位宽）。为了防止程序员和编译器乱用，ABI（应用程序二进制接口）给它们规定了严格的**分工与别名**：
+
+|**寄存器编号**|**ABI 别名**|**硬件/汇编名称**|**用途与职责说明**|
+|---|---|---|---|
+|**x0**|`zero`|零寄存器|**硬编码永远为 0**。任何写入它的操作都会被丢弃，读出来的永远是 0。|
+|**x1**|`ra`|返回地址寄存器|**Return Address**。函数调用时，硬件自动把返回地址存在这里（`jalr` 指令依赖它）。|
+|**x2**|`sp`|栈指针寄存器|**Stack Pointer**。永远指向当前线程或内核栈的栈顶。|
+|**x3**|`gp`|全局指针寄存器|**Global Pointer**。用于快速寻址全局变量（通常在小内存模型中固定）。|
+|**x4**|`tp`|线程指针寄存器|**Thread Pointer**。常用于存放线程本地存储（TLS）或在 xv6 中用来存当前 CPU 核心 ID。|
+|**x5 - x7**|`t0 - t2`|临时寄存器 0-2|**Temporaries**。属于“草稿纸”，函数调用时不需要保护，可随意覆盖。|
+|**x8**|`s0` / `fp`|保存/帧指针|**Saved / Frame Pointer**。既可当旧栈帧指针用，也属于需要被子函数严格保护的寄存器。|
+|**x9**|`s1`|保存寄存器 1|**Saved Register**。子函数如果使用了它，必须在退出前恢复原样。|
+|**x10 - x11**|`a0 - a1`|参数/返回值|**Arguments / Return Values**。用于传递前两个函数参数，或存放函数的返回值（`a0`）。|
+|**x12 - x17**|`a2 - a7`|参数寄存器 2-7|**Arguments 2-7**。用于传递第 3 到第 8 个函数参数。|
+|**x18 - x27**|`s2 - s11`|保存寄存器 2-11|**Saved Registers**。长期保存的变量，子函数修改必须恢复。|
+|**x28 - x31**|`t3 - t6`|临时寄存器 3-6|**Temporaries 3-6**。额外的临时草稿纸寄存器。|
+
+### 核心控制与状态寄存器
+CSR 按特权级分类。以下是操作系统内核开发中最核心、最常碰到的 CSR：
+#### 1. 机器态（Machine-mode）核心 CSR
+
+|**寄存器名称**|**全称 / 含义**|**核心作用**|
+|---|---|---|
+|`mstatus`|Machine Status|全局控制面板，管理中断使能、上一个特权级（MPP）等。|
+|`mstatush`|Machine Status High|32位系统下扩展的高位状态寄存器（64位系统通常合一）。|
+|`misa`|Machine ISA and Extensions|查询芯片支持的指令集扩展（如 RV64GC 中的 G、C 等）。|
+|`mie` / `mip`|Machine Interrupt Enable/Pending|机器态的中断使能位与中断挂起（触发）状态位。|
+|`mtvec`|Machine Trap Vector|机器态异常/中断发生时的跳转入口地址。|
+|`mscratch`|Machine Scratch|机器态的临时中转寄存器，常用于保存内核栈指针。|
+|`mepc`|Machine Exception Program Counter|记录机器态下被异常打断的那条指令的地址。|
+|`mcause`|Machine Cause|记录机器态下触发异常或中断的具体原因编号。|
+|`mtval`|Machine Trap Value|记录触发异常时的附加信息（如非法的内存访问地址）。|
+|`mhartid`|Machine Hardware Thread ID|**硬件线程（CPU核心）编号**（0, 1, 2...）。|
+#### 2. 监督态（Supervisor-mode，操作系统内核态）核心 CSR
+
+|**寄存器名称**|**全称 / 含义**|**核心作用**|
+|---|---|---|
+|`sstatus`|Supervisor Status|S 模式下的状态寄存器（`mstatus` 的受限子集）。|
+|`sie` / `sip`|Supervisor Interrupt Enable/Pending|S 模式的中断使能与挂起状态寄存器。|
+|`stvec`|Supervisor Trap Vector|**S 模式异常/中断入口地址**（如 xv6 的 `kernelvec`）。|
+|`sscratch`|Supervisor Scratch|S 模式下的临时中转寄存器（常用于用户态与内核态切换时存寄存器）。|
+|`sepc`|Supervisor Exception Program Counter|**记录 S 模式下被打断指令的地址**。|
+|`scause`|Supervisor Cause|**记录 S 模式下中断/异常的原因**。|
+|`stval`|Supervisor Trap Value|S 模式下异常的附加值（如出错的虚拟地址）。|
+|`satp`|Supervisor Address Translation and Protection|**页表基地址与分页控制寄存器**（开启虚拟内存的开关）。|
+
+## 三大特权级
+RISC-V 架构定义了多个特权级别，操作系统必须利用它们来实现权限隔离：
+
+- **U 模式（User, 32位编码 00）**：用户态。运行普通的应用程序（如 xv6 的 shell、cat 等），权限最低，不能直接访问硬件或修改关键寄存器。
+    
+- **S 模式（Supervisor, 32位编码 01）**：监督态/内核态。操作系统内核运行在这里，负责进程调度、虚拟内存管理和设备驱动。
+    
+- **M 模式（Machine, 32位编码 11）**：机器态。最高权限，直接掌控整颗芯片。通常用于最底层的固件（如 OpenSBI）或简单的引导桥接（如我们的 `start.c`）
+
+
+## RISC-V 核心指令集
+
+### 1. 基础与常用扩展模块
+- **I (Integer)**：整数核心指令集（算术、逻辑、跳转、访存 `lw`/`sw`/`ld`/`sd`）。
+    
+- **M (Multiply/Divide)**：乘除法扩展（如硬件执行乘法 `mul`、除法 `div`）。
+    
+- **A (Atomic)**：原子操作扩展（用于多核并发锁、互斥量，如 `lr.d`、`sc.d`）。
+    
+- **F / D (Float / Double)**：单精度与双精度浮点数运算扩展。
+    
+- **C (Compressed)**：**压缩指令扩展**。允许将常用的 32 位指令压缩为 16 位，极大地节省代码体积（xv6 和大多数嵌入式系统必开）。
+### 2. 特权与系统控制指令
+| **指令**            | **类型** | **作用**                                         |
+| ----------------- | ------ | ---------------------------------------------- |
+| `csrr`            | CSR 操作 | 从指定的 CSR 读出数据到通用寄存器。                           |
+| `csrw`            | CSR 操作 | 将通用寄存器的数据写入指定的 CSR。                            |
+| `csrrw` / `csrrs` | CSR 操作 | 读写/置位 CSR 的组合原子指令。                             |
+| `mret`            | 流程控制   | 从 **M 模式**异常/中断中返回，并根据 `mstatus` 切换特权级。        |
+| `sret`            | 流程控制   | 从 **S 模式**异常/中断中返回，并恢复到用户态或前一个 S 模式。           |
+| `ecall`           | 异常触发   | 环境调用（Environment Call）。用户态向内核发起**系统调用**的法定途径。  |
+| `ebreak`          | 异常触发   | 断点指令。触发断言或通知 GDB 调试器暂停。                        |
+| `wfi`             | 电源管理   | Wait For Interrupt。让 CPU 进入低功耗休眠，直到下一个硬件中断唤醒它。 |
 # 引导启动
 1. 定义`entry.S`
 2. 配置设备地址 比如 UART，以及一些向屏幕输出信息的宏 （memlayout.h）

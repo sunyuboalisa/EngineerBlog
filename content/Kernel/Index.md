@@ -12,6 +12,8 @@ longform:
     - RISC-V
     - 芯片
     - 电路板
+    - 问题
+    - 前期个人问题集合
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
