@@ -206,6 +206,25 @@ atlanta:
     
 22. extra vars (for example, )(always win precedence)`-e "user=my_user"`
 
+pattern （如果主机不在inventory中，无法使用该功能）
+```
+ansible <pattern> -m <module_name> -a "<module options>"
+
+ansible all -m <module> -a "<module options>" --limit "host1"
+
+# inventory
+- name: <play_name>
+  hosts: <pattern>
+```
+例子
+```
+ansible webservers -m service -a "name=httpd state=restarted"
+
+# inventory
+- name: restart webservers
+  hosts: webservers
+
+```
 
 ### Ansible CLIs
 Ad Hoc
