@@ -333,5 +333,67 @@ ansible-playbook -i inventory.int playbook.yaml
 uv run ansible-galaxy init roles/db_server
 uv run ansible-playbook site.yml
 
+## 更规范些的用法
+
+```
+├── ansible.cfg
+├── deploy-key.yaml
+├── deploy-rust.yaml
+├── inventory
+│   ├── production
+│   │   ├── group_vars
+│   │   │   ├── remote_vm_servers
+│   │   │   │   ├── rust-config.yaml
+│   │   │   │   └── ssh-config.yaml
+│   │   │   ├── local_vm_servers
+│   │   │   │   ├── rust-config.yaml
+│   │   │   │   └── ssh-config.yaml
+│   │   │   └── wsl_servers
+│   │   └── hosts.yaml
+│   └── staging
+│       ├── group_vars
+│       └── hosts.ini
+├── playbooks
+└── roles
+    ├── rustup
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    └── ssh_key_distribute
+        ├── README.md
+        ├── defaults
+        │   └── main.yml    # 默认变量
+        ├── files
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── tasks
+        │   └── main.yml    # 执行脚本即 playbook
+        ├── templates
+        ├── tests
+        │   ├── inventory
+        │   └── test.yml
+        └── vars
+            └── main.yml
+```
+inventory 中可以存放与分组名相同的各种变量的文件，其中每个分组下的文件里面变量和其他分组下的变量就算同名也不会有问题，其中all下存放通用配置，什么情况下都会加载。
+
+role 的创建可以通过 `ansible-galaxy role init ssh_key_distribute`
+其中 defaults 下的 main.yml 存放默认变量，tasks 下的 main.yml 存放执行脚本。
+
 参考：
 1.https://docs.ansible.com/ansible/latest/getting_started/get_started_inventory.html
