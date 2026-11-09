@@ -11,6 +11,7 @@ longform:
     - MCP
     - 示例
     - Agent
+    - 论文推荐
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---

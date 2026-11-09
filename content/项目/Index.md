@@ -7,6 +7,7 @@ longform:
   scenes:
     - Alisa
     - Lite Cloud Platform
+    - ScienceCommunity
   sceneTemplate: templates/chapter.md
   ignoredFiles: []
 ---
